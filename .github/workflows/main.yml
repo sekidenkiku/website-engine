@@ -23,11 +23,11 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASS }}
           script: |
-          cd /home/tokupe/website-engine.com/public_html/wp-content
-          git fetch
-          git checkout master
-          git pull origin master
-          exit
+            cd /home/tokupe/website-engine.com/public_html/wp-content
+            git fetch
+            git checkout master
+            git pull origin master
+            exit
   # staging
   deploy_staging:
     name: Depoy to the staging server.
@@ -46,8 +46,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASS }}
           script: |
-          cd /home/tokupe/website-engine.com/public_html/test/wp-content
-          git fetch
-          git checkout dev
-          git pull origin dev
-          exit
+            cd /home/tokupe/website-engine.com/public_html/test/wp-content
+            git fetch
+            git checkout dev
+            git pull origin dev
+            exit
