@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVER_GIT_ROOT: /home/tokupe/website-engine.com/public_html/wp-content
+      BRANCH_NAME: master
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
@@ -22,11 +23,10 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASS }}
           script: |
-          BRANCH=$(echo ${{ github.ref }} | sed -e 's/refs\/heads\///g')
           cd ${{ env.SERVER_GIT_ROOT }}
           git fetch
-          git checkout $BRANCH
-          git pull origin $BRANCH
+          git checkout ${{ env.BRANCH_NAME }}
+          git pull origin ${{ env.BRANCH_NAME }}
           exit
   # staging
   deploy_staging:
@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVER_GIT_ROOT: /home/tokupe/website-engine.com/public_html/test/wp-content
+      BRANCH_NAME: dev
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
@@ -45,9 +46,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASS }}
           script: |
-          BRANCH=$(echo ${{ github.ref }} | sed -e 's/refs\/heads\///g')
           cd ${{ env.SERVER_GIT_ROOT }}
           git fetch
-          git checkout $BRANCH
-          git pull origin $BRANCH
+          git checkout ${{ env.BRANCH_NAME }}
+          git pull origin ${{ env.BRANCH_NAME }}
           exit
